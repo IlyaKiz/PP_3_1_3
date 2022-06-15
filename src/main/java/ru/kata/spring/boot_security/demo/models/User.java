@@ -36,9 +36,6 @@ public class User implements UserDetails {
    @Size(min=2, message = "Не меньше 5 знаков")
    private String password;
 
-   @Transient
-   private String passwordConfirm;
-
    public String getUsername() {
       return username;
    }

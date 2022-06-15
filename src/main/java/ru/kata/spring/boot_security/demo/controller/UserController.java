@@ -52,10 +52,17 @@ public class UserController {
         return "redirect:/admin";
     }
 
+    @PutMapping("updateUser/{id}")
+    public String updateUser(@ModelAttribute("user") User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "redirect:/admin";
+    }
+
     @GetMapping("editUser/{id}")
     public String showEditForm(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userRepository.findById(id).get());
-        return "new";
+        model.addAttribute("user", userRepository.getUserById(id));
+        return "edit";
     }
 
     @GetMapping("/deleteUser/{id}")

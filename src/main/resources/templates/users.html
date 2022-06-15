@@ -10,7 +10,7 @@
 
 <table border="2">
     <tr>
-
+        <th>Id</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -18,7 +18,7 @@
         <th>Roles</th>
     </tr>
     <tr th:each="user: ${users}">
-
+        <td th:utext="${user.id}">Id</td>
         <td th:utext="${user.firstname}">First Name</td>
         <td th:utext="${user.lastname}">Last Name</td>
         <td th:utext="${user.email}">Email</td>

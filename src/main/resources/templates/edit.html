@@ -7,16 +7,18 @@
 </head>
 <body>
 
-<form th:method="post" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}">
+<form th:method="PUT" th:action="@{updateUser/{id}(id=${user.id})}" th:object="${user}">
 
-
+    <label for="firstName">Enter Id</label>
+    <input type="text" th:field="${user.id}" id="id"/>
+    <br/>
 
     <label for="firstName">Enter firstName</label>
-    <input type="text" th:field="${user.firstName}" id="firstName"/>
+    <input type="text" th:field="${user.firstname}" id="firstName"/>
     <br/>
 
     <label for="lastName">Enter lastName</label>
-    <input type="text" th:field="${user.lastName}" id="lastName"/>
+    <input type="text" th:field="${user.lastname}" id="lastName"/>
     <br/>
 
     <label for="email">Enter email</label>
@@ -32,7 +34,7 @@
     <br/>
 
     <label for="roles">Role: </label>
-    <select name="select" th:field="*{user.roles}" id="roles" multiple required>
+    <select name="select" th:field="*{roles}" id="roles" multiple required>
         <option th:value="2" th:text="USER"></option>
         <option th:value="1" th:text="ADMIN"></option>
     </select>

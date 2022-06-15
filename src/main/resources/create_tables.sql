@@ -14,9 +14,9 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `role`)
 VALUES
-    (1,'ROLE_ADMIN'),
-    (2,'ROLE_USER'),
-    (3,'GUEST');
+    (1,'ROLE_USER'),
+    (2,'ROLE_ADMIN');
+
 
 # Дамп таблицы users
 # ------------------------------------------------------------
@@ -38,8 +38,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`,`email`, `username`, `password`)
 VALUES
-    (1,'Ivan','Ivanov','ivan@mail.ru', 'user','{noop}user'),
-    (2,'Ilya','Kizilov','iliakiz@mail.ru', 'admin','{noop}admin');
+    (1,'Ivan','Ivanov','ivan@mail.ru', 'user','$2y$10$lXOl8lYLS0hmTmLUsUV0/Ocmi4jyVYJxSkHcXKyZymuiU1gBEIjXO'),
+    (2,'Ilya','Kizilov','iliakiz@mail.ru', 'admin','$2y$10$sinpqD7jWCIpl48IipxS8eSCkE0d0SL405UB3XkAys7KQRuiRZkDK');
 
 # Дамп таблицы users_roles
 # ------------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `users_roles` (
                                UNIQUE KEY (`user_id` , `role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `users_roles` VALUES (1,2), (2,1);
+INSERT INTO `users_roles` VALUES (1,1), (2,2);
 
 /*логин: admin
 пароль: iliakiz*/
