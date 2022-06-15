@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>new user</title>
@@ -28,8 +29,15 @@
     <input type="text" th:field="${user.password}" id="password"/>
     <br/>
 
+    <label for="roles">Role: </label>
+    <select name="select" th:field="*{roles}" id="roles" multiple required>
+        <option th:value="2" th:text="USER"></option>
+        <option th:value="1" th:text="ADMIN"></option>
+    </select>
+    <br/>
+
     <input type="submit" value="save"/>
 </form>
-
+<p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

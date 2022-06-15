@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -48,7 +49,9 @@ public class User implements UserDetails {
            inverseJoinColumns = @JoinColumn(name = "role_id"))
    private Set<Role> roles;
 
-
+   public void setPassword(String password) {
+      this.password = password;
+   }
 
    @Override
    public boolean isAccountNonExpired() {

@@ -10,31 +10,33 @@
 
 <table border="2">
     <tr>
-        <th>Id</th>
+
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
         <th>Username</th>
-        <th>Password</th>
-
+        <th>Roles</th>
     </tr>
     <tr th:each="user: ${users}">
-        <td th:utext="${user.id}">Id</td>
+
         <td th:utext="${user.firstname}">First Name</td>
         <td th:utext="${user.lastname}">Last Name</td>
         <td th:utext="${user.email}">Email</td>
         <td th:utext="${user.username}">Username</td>
-        <td th:utext="${user.password}">Password</td>
+        <td th:text="${user.roles}"></td>
         <td>
-            <p sec:authorize="hasRole('ADMIN')"><a th:href="@{editUser/{id}(id=${user.id})}">Edit</a></p>
+            <a th:href="@{editUser/{id}(id=${user.id})}">Edit</a>
         </td>
         <td>
-            <p sec:authorize="hasRole('ADMIN')"><a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a></p>
+            <a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a>
         </td>
     </tr>
 </table>
 <br>
-<p sec:authorize="hasRole('ADMIN')"><a href="/new">Add User</a></p>
+<a href="/new">Add User</a>
+<br>
+<a href="/user">User Info</a>
+<br>
 <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

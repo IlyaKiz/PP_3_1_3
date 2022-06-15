@@ -57,3 +57,6 @@ CREATE TABLE `users_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users_roles` VALUES (1,2), (2,1);
+
+/*логин: admin
+пароль: iliakiz*/
