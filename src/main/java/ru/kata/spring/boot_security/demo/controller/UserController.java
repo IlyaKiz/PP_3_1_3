@@ -3,31 +3,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.models.User;
+
+import java.security.Principal;
 import java.util.List;
 
 
 @Controller
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(value = "/users")
-    public String index(Model model) {
+
+    @GetMapping(value = "/admin")
+    public String admin(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "users";
+        return "/users";
+    }
+
+    @GetMapping(value = "/user")
+    public String user(Principal principal, Model model) {
+        User user = userRepository.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+        return "/user";
     }
 
     @GetMapping("/new")
@@ -39,7 +45,7 @@ public class UserController {
     @PostMapping("/createUser")
     public String createUser(@ModelAttribute("user") User user) {
         userRepository.save(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("editUser/{id}")
@@ -51,7 +57,7 @@ public class UserController {
     @GetMapping("/deleteUser/{id}")
     public String delete(@PathVariable("id") Long id) {
         userRepository.deleteById(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
 }

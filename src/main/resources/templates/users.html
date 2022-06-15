@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>home page</title>
@@ -25,15 +26,15 @@
         <td th:utext="${user.username}">Username</td>
         <td th:utext="${user.password}">Password</td>
         <td>
-            <a th:href="@{editUser/{id}(id=${user.id})}">Edit</a>
+            <p sec:authorize="hasRole('ADMIN')"><a th:href="@{editUser/{id}(id=${user.id})}">Edit</a></p>
         </td>
         <td>
-            <a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a>
+            <p sec:authorize="hasRole('ADMIN')"><a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a></p>
         </td>
     </tr>
 </table>
 <br>
-<a href="/new">Add User</a>
-
+<p sec:authorize="hasRole('ADMIN')"><a href="/new">Add User</a></p>
+<p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>
