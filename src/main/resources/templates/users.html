@@ -10,7 +10,7 @@
 
 <table border="2">
     <tr>
-        <th>Id</th>
+
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -18,12 +18,12 @@
         <th>Roles</th>
     </tr>
     <tr th:each="user: ${users}">
-        <td th:utext="${user.id}">Id</td>
+
         <td th:utext="${user.firstname}">First Name</td>
         <td th:utext="${user.lastname}">Last Name</td>
         <td th:utext="${user.email}">Email</td>
         <td th:utext="${user.username}">Username</td>
-        <td th:text="${user.roles}"></td>
+        <td th:utext="${#strings.listJoin(user.getListRoles(),', ')}"></td>
         <td>
             <a th:href="@{editUser/{id}(id=${user.id})}">Edit</a>
         </td>

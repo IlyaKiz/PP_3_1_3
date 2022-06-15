@@ -52,7 +52,7 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @PutMapping("updateUser/{id}")
+    @PostMapping("updateUser/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -48,6 +46,18 @@ public class User implements UserDetails {
 
    public void setPassword(String password) {
       this.password = password;
+   }
+
+   public Set<Role> getRoles() {
+      return roles;
+   }
+
+   public List<String> getListRoles() {
+      List<String> getListRoles = new ArrayList<>();
+      for (Role e : roles) {
+         getListRoles.add(e.getRole().substring(5));
+      }
+      return getListRoles;
    }
 
    @Override

@@ -7,11 +7,7 @@
 </head>
 <body>
 
-<form th:method="PUT" th:action="@{updateUser/{id}(id=${user.id})}" th:object="${user}">
-
-    <label for="firstName">Enter Id</label>
-    <input type="text" th:field="${user.id}" id="id"/>
-    <br/>
+<form th:method="PUT" th:action="@{/updateUser/{id}(id=${user.getId()})}" th:object="${user}">
 
     <label for="firstName">Enter firstName</label>
     <input type="text" th:field="${user.firstname}" id="firstName"/>
