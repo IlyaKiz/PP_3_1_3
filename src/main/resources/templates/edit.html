@@ -7,37 +7,38 @@
 </head>
 <body>
 
-<form th:method="PUT" th:action="@{/updateUser/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="PUT" th:action="@{/admin/updateUser/{id}(id=${user.getId()})}" th:object="${user}">
 
     <label for="firstName">Enter firstName</label>
     <input type="text" th:field="${user.firstname}" id="firstName"/>
     <br/>
-
+    <br/>
     <label for="lastName">Enter lastName</label>
     <input type="text" th:field="${user.lastname}" id="lastName"/>
     <br/>
-
+    <br/>
     <label for="email">Enter email</label>
     <input type="text" th:field="${user.email}" id="email"/>
     <br/>
-
+    <br/>
     <label for="lastName">Enter Username</label>
     <input type="text" th:field="${user.username}" id="username"/>
     <br/>
-
+    <br/>
     <label for="email">Enter Password</label>
     <input type="text" th:field="${user.password}" id="password"/>
     <br/>
-
+    <br/>
     <label for="roles">Role: </label>
     <select name="select" th:field="*{roles}" id="roles" multiple required>
         <option th:value="2" th:text="USER"></option>
         <option th:value="1" th:text="ADMIN"></option>
     </select>
     <br/>
-
-    <input type="submit" value="save"/>
+    <br/>
+    <input type="submit" value="update"/>
 </form>
+<p><a href="#" onclick="history.back();">Back</a></p>
 <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

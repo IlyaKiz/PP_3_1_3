@@ -60,3 +60,6 @@ INSERT INTO `users_roles` VALUES (1,1), (2,2);
 
 /*логин: admin
 пароль: iliakiz*/
+
+/*логин: user
+пароль: user*/

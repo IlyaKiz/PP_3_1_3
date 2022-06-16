@@ -12,63 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     private final UserRepository userRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder;
-
     @Autowired
-    public UserController(UserRepository userRepository,BCryptPasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
-
-    @GetMapping(value = "/admin")
-    public String admin(Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("users", users);
-        return "/users";
-    }
-
-    @GetMapping(value = "/user")
+    @GetMapping
     public String user(Principal principal, Model model) {
         User user = userRepository.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "/user";
-    }
-
-    @GetMapping("/new")
-    public String showFormForNewUser(Model model) {
-        model.addAttribute("user", new User());
-        return "new";
-    }
-
-    @PostMapping("/createUser")
-    public String createUser(@ModelAttribute("user") User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "redirect:/admin";
-    }
-
-    @PostMapping("updateUser/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "redirect:/admin";
-    }
-
-    @GetMapping("editUser/{id}")
-    public String showEditForm(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userRepository.getUserById(id));
-        return "edit";
-    }
-
-    @GetMapping("/deleteUser/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        userRepository.deleteById(id);
-        return "redirect:/admin";
     }
 
 }

@@ -1,4 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

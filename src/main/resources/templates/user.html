@@ -15,7 +15,7 @@
         <th>Last Name</th>
         <th>Email</th>
         <th>Username</th>
-
+        <th>Roles</th>
 
     </tr>
     <tr>
@@ -24,9 +24,10 @@
         <td th:utext="${user.lastname}">Last Name</td>
         <td th:utext="${user.email}">Email</td>
         <td th:utext="${user.username}">Username</td>
+        <td th:utext="${#strings.listJoin(user.getListRoles(),', ')}"></td>
     </tr>
 </table>
-<br>
+<p><a href="#" onclick="history.back();">Back</a></p>
 <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

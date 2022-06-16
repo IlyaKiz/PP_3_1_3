@@ -7,37 +7,38 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/createUser}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin/createUser}" th:object="${user}">
 
     <label for="firstName">Enter First Name</label>
     <input type="text" th:field="${user.firstname}" id="firstname"/>
     <br/>
-
+    <br/>
     <label for="lastName">Enter Last Name</label>
     <input type="text" th:field="${user.lastname}" id="lastname"/>
     <br/>
-
-    <label for="email">Enter Email</label>
+    <br/>
+    <label for="email">Enter Email     </label>
     <input type="text" th:field="${user.email}" id="email"/>
     <br/>
-
-    <label for="lastName">Enter Username</label>
+    <br/>
+    <label for="lastName">Enter Username  </label>
     <input type="text" th:field="${user.username}" id="username"/>
     <br/>
-
-    <label for="email">Enter Password</label>
+    <br/>
+    <label for="email">Enter Password  </label>
     <input type="text" th:field="${user.password}" id="password"/>
     <br/>
-
+    <br/>
     <label for="roles">Role: </label>
     <select name="select" th:field="*{roles}" id="roles" multiple required>
         <option th:value="2" th:text="USER"></option>
         <option th:value="1" th:text="ADMIN"></option>
     </select>
     <br/>
-
+    <br/>
     <input type="submit" value="save"/>
 </form>
+<p><a href="#" onclick="history.back();">Back</a></p>
 <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </body>
 </html>

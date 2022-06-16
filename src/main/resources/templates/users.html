@@ -25,15 +25,15 @@
         <td th:utext="${user.username}">Username</td>
         <td th:utext="${#strings.listJoin(user.getListRoles(),', ')}"></td>
         <td>
-            <a th:href="@{editUser/{id}(id=${user.id})}">Edit</a>
+            <a th:href="@{admin/editUser/{id}(id=${user.id})}">Edit</a>
         </td>
         <td>
-            <a th:href="@{/deleteUser/{id}(id=${user.id})}">Delete</a>
+            <a th:href="@{/admin/deleteUser/{id}(id=${user.id})}">Delete</a>
         </td>
     </tr>
 </table>
 <br>
-<a href="/new">Add User</a>
+<a href="/admin/new">Add User</a>
 <br>
 <a href="/user">User Info</a>
 <br>

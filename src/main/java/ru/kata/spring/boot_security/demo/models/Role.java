@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -30,4 +29,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getRole();
     }
+
 }
