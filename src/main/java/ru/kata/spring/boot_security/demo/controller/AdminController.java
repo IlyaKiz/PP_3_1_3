@@ -22,7 +22,6 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @GetMapping
     public String admin(Model model) {
         List<User> users = userRepository.findAll();
@@ -43,20 +42,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("updateUser/{id}")
+    @PutMapping("updateUser/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("editUser/{id}")
-    public String showEditForm(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userRepository.getUserById(id));
-        return "edit";
-    }
-
-    @GetMapping("/deleteUser/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public String delete(@PathVariable("id") Long id) {
         userRepository.deleteById(id);
         return "redirect:/admin";

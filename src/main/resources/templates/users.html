@@ -83,10 +83,9 @@
                         <td th:text="${user.id}"></td>
                         <td th:text="${user.firstname}"></td>
                         <td th:text="${user.lastname}"></td>
-
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.username}"></td>
-                        <td th:text="${#strings.listJoin(user.getListRoles(),' ')}"></td>
+                        <td th:text="${#strings.listJoin(user.getListRoles(),', ')}"></td>
                         <td>
 
                             <input data-bs-toggle="modal" th:data-bs-target="${'#exampleModal'+user.id}"
@@ -103,21 +102,21 @@
                                                     aria-label="Close"></button>
                                         </div>
 
-                                        <form th:method="PUT" th:action="@{/admin/{id}(id=${user.getId()})}"
+                                        <form th:method="PUT" th:action="@{/admin/updateUser/{id}(id=${user.getId()})}"
                                               th:object="${user}">
 
                                             <div class="modal-body">
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="firstName" class="form-label">First name: </label>
+                                                    <label for="firstname" class="form-label">First name: </label>
                                                     <input type="text" th:value="${user.firstname}"
-                                                           th:attr="name='firstName'"
-                                                           class="form-control is-valid" id="firstName" required/>
+                                                           th:attr="name='firstname'"
+                                                           class="form-control is-valid" id="firstname" required/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="lastName" class="form-label">Last name: </label>
+                                                    <label for="lastname" class="form-label">Last name: </label>
                                                     <input type="text" th:value="${user.lastname}"
-                                                           th:attr="name='lastName'"
-                                                           class="form-control is-valid" id="lastName" required/>
+                                                           th:attr="name='lastname'"
+                                                           class="form-control is-valid" id="lastname" required/>
                                                 </div>
 
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
@@ -126,10 +125,10 @@
                                                            class="form-control is-valid" id="email" required/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="phoneNumber" class="form-label">Phone: </label>
-                                                    <input type="text" th:value="${user.password}"
-                                                           th:attr="name='phoneNumber'"
-                                                           class="form-control is-valid" id="phoneNumber" required/>
+                                                    <label for="username" class="form-label">Username: </label>
+                                                    <input type="text" th:value="${user.username}"
+                                                           th:attr="name='username'"
+                                                           class="form-control" id="username" required/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
                                                     <label for="password" class="form-label">Password: </label>
@@ -145,9 +144,9 @@
                                                             name="select" th:value="${user.roles}"
                                                             th:attr="name='roles'"
                                                             id="roles" size="2" multiple required>
-                                                        <option selected="selected" th:value="2"
+                                                        <option selected="selected" th:value="1"
                                                                 th:text="USER"></option>
-                                                        <option th:value="1" th:text="ADMIN"></option>
+                                                        <option th:value="2" th:text="ADMIN"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -176,21 +175,21 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
-                                        <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}"
+                                        <form th:method="DELETE" th:action="@{/admin/deleteUser/{id}(id=${user.getId()})}"
                                               th:object="${user}">
 
                                             <div class="modal-body">
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="firstName1" class="form-label">First name: </label>
+                                                    <label for="firstname1" class="form-label">First name: </label>
                                                     <input type="text" th:value="${user.firstname}"
-                                                           th:attr="name='firstName'"
-                                                           class="form-control" id="firstName1" disabled readonly/>
+                                                           th:attr="name='firstname'"
+                                                           class="form-control" id="firstname1" disabled readonly/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="lastName1" class="form-label">Last name: </label>
+                                                    <label for="lastname1" class="form-label">Last name: </label>
                                                     <input type="text" th:value="${user.lastname}"
-                                                           th:attr="name='lastName'"
-                                                           class="form-control" id="lastName1" disabled readonly/>
+                                                           th:attr="name='lastname'"
+                                                           class="form-control" id="lastname1" disabled readonly/>
                                                 </div>
 
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
@@ -199,10 +198,10 @@
                                                            class="form-control" id="email1" disabled readonly/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
-                                                    <label for="phoneNumber1" class="form-label">Phone: </label>
-                                                    <input type="text" th:value="${user.password}"
-                                                           th:attr="name='phoneNumber'"
-                                                           class="form-control" id="phoneNumber1" disabled readonly/>
+                                                    <label for="username1" class="form-label">Phone: </label>
+                                                    <input type="text" th:value="${user.username}"
+                                                           th:attr="name='username'"
+                                                           class="form-control" id="username1" disabled readonly/>
                                                 </div>
                                                 <div class="mb-3 col-md-6 align-items-center text-center mx-auto">
                                                     <label for="password1" class="form-label">Password: </label>
@@ -217,8 +216,8 @@
                                                             name="select" th:value="${user.roles}"
                                                             th:attr="name='roles'"
                                                             id="roles1" size="2" multiple disabled readonly>
-                                                        <option th:value="2" th:text="USER"></option>
-                                                        <option th:value="1" th:text="ADMIN"></option>
+                                                        <option th:value="1" th:text="USER"></option>
+                                                        <option th:value="2" th:text="ADMIN"></option>
                                                     </select>
                                                 </div>
                                             </div>
