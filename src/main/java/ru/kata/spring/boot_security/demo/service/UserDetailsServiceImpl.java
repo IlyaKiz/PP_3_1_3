@@ -15,29 +15,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    private final RoleRepository roleRepository;
-
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        UserDetails loadedUser;
-
-        try {
-            User client = userRepository.findByUsername(username);
-
-            loadedUser = new org.springframework.security.core.userdetails.User(
-                    client.getUsername(), client.getPassword(),
-                    client.getRoles());
-        } catch (Exception repositoryProblem) {
-            throw new InternalAuthenticationServiceException(repositoryProblem.getMessage(), repositoryProblem);
-        }
-        return loadedUser;
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+                "Email " + username + " not found"));
     }
 
 }

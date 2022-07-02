@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.service.UserService;
+
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -15,16 +17,16 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public String user(Principal principal, Model model) {
-        User user = userRepository.findByUsername(principal.getName());
+    public String showUser(Principal principal, Model model) {
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "/user";
     }
